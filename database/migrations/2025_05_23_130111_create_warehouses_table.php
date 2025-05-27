@@ -12,7 +12,18 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('warehouses', function (Blueprint $table) {
-            $table->id();
+            $table->uuid('uuid')->primary();
+            $table->string('name');
+            $table->string('slug');
+            $table->decimal('latitude', 10, 8);
+            $table->decimal('longitude', 11, 8);
+            $table->string('address_1');
+            $table->string('address_2')->nullable();
+            $table->string('town')->nullable();
+            $table->string('county')->nullable();
+            $table->string('postcode')->nullable();
+            $table->string('state_code')->nullable();
+            $table->string('country_code');
             $table->timestamps();
         });
     }

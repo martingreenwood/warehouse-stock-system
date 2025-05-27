@@ -12,7 +12,11 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('warehouse_stock', function (Blueprint $table) {
-            $table->id();
+            $table->uuid('uuid')->primary();
+            $table->foreignUuid('warehouse_uuid')->references('uuid')->on('warehouses');
+            $table->foreignUuid('product_uuid')->references('uuid')->on('products');
+            $table->integer('quantity')->default(0);
+            $table->integer('threshold')->default(0);
             $table->timestamps();
         });
     }

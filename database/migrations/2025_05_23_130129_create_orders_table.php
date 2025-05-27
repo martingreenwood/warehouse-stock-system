@@ -12,7 +12,9 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('orders', function (Blueprint $table) {
-            $table->id();
+            $table->uuid('uuid')->primary();
+            $table->string('status'); // placed, dispatched, cancelled
+            $table->decimal('total', 10, 2);
             $table->timestamps();
         });
     }
