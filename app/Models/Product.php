@@ -54,4 +54,65 @@ class Product extends Model
     {
         return $this->warehouseStock()->sum('quantity') - $this->totalThreshold();
     }
+
+    /**
+     * Get warehouse stock breakdown with detailed information.
+     */
+    public function getWarehouseStockBreakdown(): array
+    {
+        return $this->warehouseStock->map(function ($stock) {
+            return [
+                'warehouse_id'   => $stock->warehouse->id,
+                'warehouse_name' => $stock->warehouse->name,
+                'warehouse_slug' => $stock->warehouse->slug,
+                'quantity'       => $stock->quantity,
+                'threshold'      => $stock->threshold,
+                'available'      => max(0, $stock->quantity - $stock->threshold),
+                'status'         => $this->getWarehouseStockStatus($stock),
+                'location'       => $this->formatLocation($stock->warehouse),
+                'coordinates'    => [
+                    'latitude'  => $stock->warehouse->latitude,
+                    'longitude' => $stock->warehouse->longitude,
+                ],
+            ];
+        })->toArray();
+    }
+
+    /**
+     * Get the stock status for a specific warehouse.
+     */
+    private function getWarehouseStockStatus($stock): string
+    {
+        if ($stock->quantity <= 0) {
+            return 'empty';
+        }
+
+        if ($stock->quantity <= $stock->threshold) {
+            return 'low';
+        }
+
+        return 'good';
+    }
+
+    /**
+     * Format warehouse location for display.
+     */
+    private function formatLocation($warehouse): string
+    {
+        $location = [];
+
+        if ($warehouse->town) {
+            $location[] = $warehouse->town;
+        }
+
+        if ($warehouse->county) {
+            $location[] = $warehouse->county;
+        }
+
+        if ($warehouse->postcode) {
+            $location[] = $warehouse->postcode;
+        }
+
+        return implode(', ', $location) ?: 'Location not specified';
+    }
 }
