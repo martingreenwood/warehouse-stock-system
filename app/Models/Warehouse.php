@@ -7,8 +7,6 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Warehouse extends Model
 {
-    // Uses default 'id' as primary key (auto-incrementing integer)
-    // 'uuid' is kept as a unique identifier for public-facing operations
 
     protected $fillable = [
         'name',
