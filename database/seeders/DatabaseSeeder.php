@@ -8,14 +8,14 @@ class DatabaseSeeder extends Seeder
 {
     public function run(): void
     {
-        User::factory()->create(
+        User::firstOrCreate(
+            ['email' => 'test@example.com'],
             [
-                'name'  => 'Test User',
-                'email' => 'test@example.com',
+                'name'     => 'Test User',
+                'password' => bcrypt('password'),
             ]
         );
 
-        // Seed the warehouse system data in correct order
         $this->call(
             [
                 ProductSeeder::class,

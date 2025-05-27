@@ -6,7 +6,6 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class OrderItem extends Model
 {
-    protected $primaryKey = 'uuid';
 
     protected $fillable = [
         'order_uuid',

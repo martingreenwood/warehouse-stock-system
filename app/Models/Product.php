@@ -7,8 +7,6 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Product extends Model
 {
-    protected $primaryKey = 'uuid';
-
     protected $fillable = [
         'title',
         'description',
@@ -31,6 +29,6 @@ class Product extends Model
 
     public function warehouseStock(): HasMany
     {
-        return $this->hasMany(WarehouseStock::class, 'warehouse_stock_uuid', 'uuid')->withPivot('quantity', 'threshold');
+        return $this->hasMany(WarehouseStock::class, 'product_uuid', 'uuid');
     }
 }

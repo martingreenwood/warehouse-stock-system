@@ -6,7 +6,6 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Order extends Model
 {
-    protected $primaryKey = 'uuid';
 
     protected $fillable = [
         'status',

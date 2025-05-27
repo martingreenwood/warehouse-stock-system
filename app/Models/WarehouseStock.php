@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class WarehouseStock extends Model
 {
-    protected $primaryKey = 'uuid';
+    protected $table = 'warehouse_stock';
 
     protected $fillable = [
         'warehouse_uuid',

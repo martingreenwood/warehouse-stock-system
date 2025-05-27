@@ -12,7 +12,8 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('orders', function (Blueprint $table) {
-            $table->uuid('uuid')->primary();
+            $table->id();
+            $table->uuid('uuid')->unique();
             $table->string('status'); // placed, dispatched, cancelled
             $table->decimal('total', 10, 2);
             $table->timestamps();
