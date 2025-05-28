@@ -198,11 +198,9 @@
 
     <script>
         function toggleBreakdown(productId) {
-            console.log('Toggling breakdown for product ID:', productId);
+            event.preventDefault();
             const breakdownRow = document.getElementById('breakdown-' + productId);
             const button = event.target;
-
-            console.log('Breakdown row element:', breakdownRow);
 
             if (!breakdownRow) {
                 console.error('Breakdown row not found for product ID:', productId);
@@ -212,11 +210,9 @@
             if (breakdownRow.style.display === 'none' || breakdownRow.style.display === '') {
                 breakdownRow.style.display = 'table-row';
                 button.textContent = 'Hide Details';
-                console.log('Showing breakdown');
             } else {
                 breakdownRow.style.display = 'none';
                 button.textContent = 'View Details';
-                console.log('Hiding breakdown');
             }
         }
     </script>
