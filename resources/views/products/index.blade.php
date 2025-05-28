@@ -40,6 +40,8 @@
         .warehouse-breakdown-inline { margin-bottom: 8px; }
         .warehouse-item-inline { margin-bottom: 4px; font-size: 12px; line-height: 1.4; }
         .warehouse-item-inline strong { color: #333; }
+        .alert { padding: 15px; margin-bottom: 20px; border-radius: 4px; }
+        .alert-success { background: #d4edda; color: #155724; border: 1px solid #c3e6cb; }
     </style>
 </head>
 <body>
@@ -48,6 +50,13 @@
             <h1>Products Inventory</h1>
             <p>Manage and view product stock levels across all warehouses</p>
         </div>
+
+        <!-- Success Message -->
+        @if(session('success'))
+            <div class="alert alert-success">
+                {{ session('success') }}
+            </div>
+        @endif
 
         <div class="search-filters">
             <form method="GET" action="{{ route('products.index') }}">
